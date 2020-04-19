@@ -1,0 +1,10 @@
+inserting at the front of an array would be o(n) being that to insert at the front then the need to adjust and shift everything back one index would carry down the entire length of the list previous to the insert.
+
+Allthough inserting at the end would be 0(1) as there is no need to do anything but add the new index location. only time it would be different would be if the array reached the end of the original capacity and needed more room. since it would need a new memory block (unused or old enough to reuse) in which case could be 0(n)^2 as the function to resize atually loops in 2 layers. But since the capacity tends to increase by double each time; there are very few times that this would need to occur even with many entries
+
+removing is similar depending on the exact location. 
+
+accessing within the usage of the index is 0(1) unless the bucket or the each index has multiple items hashed to the same index then utillizes the Linked List attributes. this still wouldn't be linear in the since that we still aren't going to travel through each index... it looks through a possible linked list at that hashed index.
+
+blocks in a blockchain are like pieces in a long jigsaw puzzle as they work together to make the whole... there is a Genisis block that is initiated but then every block afterwards takes the info of the previous block then hashed and minipulated to create the Proof of work for the next block. this proof of work takes random numbers until it matches a "difficulty"  or a set of number of zeros (some specific pattern) at the start. this proof of work block string then gets added to the new good proof and then hashed to gether. if it matches the pattern then it is used as the new proof for the next block.
+ since each block is dependent on the previous block information... there is not a way to steal or manipulate this proof/block setup unless you somehow make the next block that wasn't created yet
