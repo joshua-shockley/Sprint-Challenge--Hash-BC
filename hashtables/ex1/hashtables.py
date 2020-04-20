@@ -90,3 +90,12 @@ def hash_table_resize(hash_table):
             current_pair = current_pair.next
 
     return new_hash_table
+
+
+ht = HashTable(10)
+
+print(ht.storage)
+hash_table_insert(ht, 33, 10)
+hash_table_insert(ht, 22, 10)
+hash_table_insert(ht, 11, 5)
+print("key 33:", hash_table_retrieve(ht, 33))

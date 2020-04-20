@@ -12,7 +12,10 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     YOUR CODE HERE
     """
-
+    # limit is the number in which is the weight request
+    for items in range(ht.storage)-1:
+        print(hash_table_retrieve(ht, items.key))
+        return hash_table_retrieve(ht, items.key)
     return None
 
 

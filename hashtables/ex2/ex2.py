@@ -17,7 +17,11 @@ def reconstruct_trip(tickets, length):
     route = [None] * length
 
     """
-    YOUR CODE HERE
+    YOUR CODE HEREs
     """
 
-    pass
+    for ob in tickets:
+        print(ob.source)
+
+
+reconstruct_trip(tickets, 10)
