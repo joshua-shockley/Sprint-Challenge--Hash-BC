@@ -1,9 +1,11 @@
 import hashlib
 import requests
-
+import time
 import sys
+import json
 
 from uuid import uuid4
+
 
 from timeit import default_timer as timer
 
@@ -19,13 +21,14 @@ def proof_of_work(last_proof):
     - p is the previous proof, and p' is the new proof
     - Use the same method to generate SHA-256 hashes as the examples in class
     """
-
     start = timer()
-
     print("Searching for next proof")
+    print('last_proof', last_proof)
     proof = 0
     #  TODO: Your code here
-
+    last_hash = hashlib.sha256(str(last_proof).encode()).hexdigest()
+    while valid_proof(last_hash, proof) == False:
+        proof += 1
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
@@ -38,9 +41,16 @@ def valid_proof(last_hash, proof):
 
     IE:  last_hash: ...AE912345, new hash 12345E88...
     """
-
     # TODO: Your code here!
-    pass
+    guess = last_hash + str(proof)
+    guess = guess.encode()
+    hash_value = hashlib.sha256(guess).hexdigest()
+    # returns the
+    if hash_value[:5] == last_hash[-5:]:
+        # print(f'yes a freaking match dude')
+        print(
+            f"last hash last 5: {last_hash[-5:]}, {last_hash}\n first five of new hash: {hash_value[:5]}, {hash_value}")
+    return hash_value[:5] == last_hash[-5:]
 
 
 if __name__ == '__main__':
@@ -49,6 +59,7 @@ if __name__ == '__main__':
         node = sys.argv[1]
     else:
         node = "https://lambda-coin.herokuapp.com/api"
+        # node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
@@ -76,5 +87,6 @@ if __name__ == '__main__':
         if data.get('message') == 'New Block Forged':
             coins_mined += 1
             print("Total coins mined: " + str(coins_mined))
+            # time.sleep(1)
         else:
             print(data.get('message'))
